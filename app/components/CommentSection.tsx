@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { createComment } from "@/app/actions/comments";
-import { commentSchema, type CommentInput } from "@/lib/validation/schemas";
+import { commentSchema } from "@/lib/validation/schemas";
 import Image from "next/image";
 import type { Comment } from "@/lib/db/comments";
+import { Button } from "@/app/components/ui/Button";
 
 interface CommentSectionProps {
   photoId: string;
@@ -86,13 +87,9 @@ export function CommentSection({ photoId, initialComments }: CommentSectionProps
             <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>
           )}
         </div>
-        <button
-          type="submit"
-          disabled={isSubmitting || !content.trim()}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        >
+        <Button type="submit" disabled={isSubmitting || !content.trim()}>
           {isSubmitting ? "Sender..." : "Legg til kommentar"}
-        </button>
+        </Button>
       </form>
 
       <div className="space-y-4">

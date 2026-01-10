@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { approveUser } from "@/app/actions/admin";
 import Image from "next/image";
 import type { User } from "@/lib/db/users";
+import { Button } from "@/app/components/ui/Button";
 
 interface UserApprovalListProps {
   initialUsers: User[];
@@ -86,20 +87,20 @@ export function UserApprovalList({ initialUsers }: UserApprovalListProps) {
             </div>
           </div>
           <div className="flex gap-2">
-            <button
+            <Button
+              variant="success"
               onClick={() => handleApproval(user.id, true)}
               disabled={processing === user.id}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {processing === user.id ? "Behandler..." : "Godkjenn"}
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="danger"
               onClick={() => handleApproval(user.id, false)}
               disabled={processing === user.id}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Avvis
-            </button>
+            </Button>
           </div>
         </div>
       ))}

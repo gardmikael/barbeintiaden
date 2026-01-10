@@ -7,6 +7,8 @@ import Image from "next/image";
 import { uploadPhoto } from "@/app/actions/photos";
 import { photoUploadSchema } from "@/lib/validation/schemas";
 import { compressImage } from "@/lib/image/compress";
+import { ButtonLink } from "@/app/components/ui/ButtonLink";
+import { Button } from "@/app/components/ui/Button";
 
 export function UploadForm() {
   const { data: session } = useSession();
@@ -143,12 +145,9 @@ export function UploadForm() {
         <p className="text-zinc-600 dark:text-zinc-400 mb-4">
           Du må være innlogget for å laste opp bilder
         </p>
-        <a
-          href="/login"
-          className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
+        <ButtonLink href="/login" variant="outline">
           Logg inn
-        </a>
+        </ButtonLink>
       </div>
     );
   }
@@ -210,7 +209,7 @@ export function UploadForm() {
           multiple
           onChange={handleFileChange}
           required
-          className="block w-full text-sm text-zinc-600 dark:text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900 dark:file:text-blue-300"
+          className="block w-full text-sm text-zinc-600 dark:text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-zinc-100 dark:file:bg-zinc-800 file:text-zinc-700 dark:file:text-zinc-300 hover:file:bg-zinc-200 dark:hover:file:bg-zinc-700"
           disabled={isUploading}
         />
         {previews.length > 0 && (
@@ -291,10 +290,10 @@ export function UploadForm() {
         </div>
       )}
 
-      <button
+      <Button
         type="submit"
         disabled={isUploading || previews.length === 0}
-        className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="w-full"
       >
         {(() => {
           if (isUploading) {
@@ -304,7 +303,7 @@ export function UploadForm() {
           const plural = count !== 1 ? "r" : "";
           return `Last opp ${count} bilde${plural}`;
         })()}
-      </button>
+      </Button>
     </form>
   );
 }

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ButtonLink } from "@/app/components/ui/ButtonLink";
 
 export default function NotFound() {
   return (
@@ -10,12 +10,9 @@ export default function NotFound() {
         <p className="text-zinc-600 dark:text-zinc-400 mb-8">
           Siden du leter etter finnes ikke
         </p>
-        <Link
-          href="/"
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
+        <ButtonLink href="/" variant="outline">
           Tilbake til hjemmesiden
-        </Link>
+        </ButtonLink>
       </div>
     </div>
   );

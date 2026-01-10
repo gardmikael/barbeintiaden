@@ -3,6 +3,7 @@ import { CommentSection } from "@/app/components/CommentSection";
 import { DeletePhotoButton } from "@/app/components/DeletePhotoButton";
 import { getCommentsByPhotoId } from "@/lib/db/comments";
 import { auth } from "@/lib/auth";
+import { Navigation } from "@/app/components/Navigation";
 import Link from "next/link";
 
 interface PhotoPageProps {
@@ -16,18 +17,15 @@ export default async function PhotoPage({ params }: PhotoPageProps) {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black">
-      <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link
-            href="/gallery"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            ← Tilbake til galleri
-          </Link>
-        </div>
-      </header>
+      <Navigation session={session} />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Link
+          href="/gallery"
+          className="inline-block mb-6 text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          ← Tilbake til galleri
+        </Link>
         <div className="space-y-6">
           <PhotoCard photoId={id} />
           {session?.user?.isAdmin && (
