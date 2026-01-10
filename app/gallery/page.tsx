@@ -1,9 +1,9 @@
-import { PhotoGallery } from "./components/PhotoGallery";
+import { PhotoGallery } from "@/app/components/PhotoGallery";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { LogoutButton } from "@/app/components/LogoutButton";
 
-export default async function Home() {
+export default async function GalleryPage() {
   const session = await auth();
 
   return (
@@ -11,9 +11,18 @@ export default async function Home() {
       <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-black dark:text-zinc-50">
-              Barbeintiaden
-            </h1>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/"
+                className="text-2xl font-bold text-black dark:text-zinc-50 hover:underline"
+              >
+                Barbeintiaden
+              </Link>
+              <span className="text-zinc-400 dark:text-zinc-600">/</span>
+              <h1 className="text-xl font-semibold text-black dark:text-zinc-50">
+                Bildegalleri
+              </h1>
+            </div>
             <nav className="flex items-center gap-4">
               {session?.user ? (
                 <>
@@ -49,20 +58,7 @@ export default async function Home() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center py-12">
-          <h2 className="text-3xl font-bold text-black dark:text-zinc-50 mb-4">
-            Velkommen til Barbeintiaden
-          </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 mb-8">
-            Se bilder fra tidligere arrangementer
-          </p>
-          <Link
-            href="/gallery"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Se bildegalleri
-          </Link>
-        </div>
+        <PhotoGallery />
       </main>
     </div>
   );
