@@ -1,26 +1,47 @@
 @import "tailwindcss";
 
+/* PhotoSwipe dark mode support */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --pswp-bg: rgba(0, 0, 0, 0.9);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --pswp-bg: rgba(0, 0, 0, 0.95);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* PhotoSwipe custom styling */
+.pswp__bg {
+  background: var(--pswp-bg) !important;
+}
+
+.pswp__caption {
+  background: rgba(0, 0, 0, 0.5) !important;
+  padding: 1rem !important;
+  border-radius: 0.5rem;
+}
+
+.pswp__caption__center {
+  text-align: left !important;
+}
+
+/* PhotoSwipe image fit - behold aspect ratio */
+.pswp__img {
+  object-fit: contain !important;
+}
+
+/* Reset button styles for gallery */
+button[type="button"] {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button[type="button"]:focus {
+  outline: none;
 }

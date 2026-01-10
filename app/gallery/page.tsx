@@ -1,4 +1,4 @@
-import { PhotoGallery } from "@/app/components/PhotoGallery";
+import { PhotoGalleryServer } from "@/app/components/PhotoGalleryServer";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { LogoutButton } from "@/app/components/LogoutButton";
@@ -58,7 +58,7 @@ export default async function GalleryPage() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <PhotoGallery />
+        <PhotoGalleryServer />
       </main>
     </div>
   );
