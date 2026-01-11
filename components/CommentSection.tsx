@@ -9,8 +9,8 @@ import type { Comment } from "@/lib/db/comments";
 import { Button } from "@/components/ui/Button";
 
 interface CommentSectionProps {
-  photoId: string;
-  initialComments: Comment[];
+  readonly photoId: string;
+  readonly initialComments: Comment[];
 }
 
 export function CommentSection({ photoId, initialComments }: CommentSectionProps) {

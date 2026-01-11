@@ -106,7 +106,8 @@ export async function createPhoto(
   url: string,
   year: number,
   title?: string,
-  description?: string
+  description?: string,
+  filePath?: string
 ): Promise<Photo> {
   // Bruk admin client for å omgå RLS ved INSERT
   const supabase = createAdminClient();
@@ -119,6 +120,7 @@ export async function createPhoto(
       year,
       title,
       description,
+      file_path: filePath,
     })
     .select()
     .single();
@@ -134,10 +136,10 @@ export async function deletePhoto(photoId: string): Promise<void> {
   // Bruk admin client for å omgå RLS ved DELETE
   const supabase = createAdminClient();
   
-  // Hent bilde-info først for å slette filen fra Storage
+  // Hent bilde-info først for å slette filen fra Filen.io
   const { data: photo, error: fetchError } = await supabase
     .from("photos")
-    .select("url")
+    .select("file_path")
     .eq("id", photoId)
     .single();
 
@@ -149,19 +151,14 @@ export async function deletePhoto(photoId: string): Promise<void> {
     throw new Error("Photo not found");
   }
 
-  // Ekstraher filnavn fra URL (format: https://xxx.supabase.co/storage/v1/object/public/photos/user_id/filename)
-  const urlParts = photo.url.split("/photos/");
-  if (urlParts.length > 1) {
-    const filePath = urlParts[1];
-    
-    // Slett filen fra Storage
-    const { error: storageError } = await supabase.storage
-      .from("photos")
-      .remove([filePath]);
-
-    if (storageError) {
-      console.error("Error deleting file from storage:", storageError);
-      // Fortsett med å slette fra database selv om Storage-sletting feiler
+  // Slett filen fra Filen.io hvis file_path finnes
+  if (photo.file_path) {
+    try {
+      const { deletePhoto: deletePhotoFromFilen } = await import("@/lib/filen/client");
+      await deletePhotoFromFilen(photo.file_path);
+    } catch (error) {
+      console.error("Error deleting file from Filen.io:", error);
+      // Fortsett med å slette fra database selv om Filen.io-sletting feiler
     }
   }
 

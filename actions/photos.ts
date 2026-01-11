@@ -36,35 +36,23 @@ export async function uploadPhoto(formData: FormData) {
   });
 
   // Filen er allerede komprimert på client-side
-  // Last opp til Supabase Storage (bruk admin client for å omgå RLS)
-  const { createAdminClient } = await import("@/lib/supabase/admin");
-  const supabase = createAdminClient();
-  const fileExt = validated.file.name.split(".").pop();
-  const fileName = `${session.user.id}/${Date.now()}.${fileExt}`;
+  // Last opp til Filen.io
+  const { uploadPhoto: uploadPhotoToFilen, getPublicUrl } = await import("@/lib/filen/client");
+  
+  // Upload til Filen.io
+  const filePath = await uploadPhotoToFilen(validated.file, session.user.id);
+  
+  // Generer public share URL
+  const publicUrl = await getPublicUrl(filePath);
 
-  const { data: uploadData, error: uploadError } = await supabase.storage
-    .from("photos")
-    .upload(fileName, validated.file, {
-      cacheControl: "3600",
-      upsert: false,
-    });
-
-  if (uploadError) {
-    throw new Error(`Kunne ikke laste opp bilde: ${uploadError.message}`);
-  }
-
-  // Hent public URL
-  const {
-    data: { publicUrl },
-  } = supabase.storage.from("photos").getPublicUrl(uploadData.path);
-
-  // Lagre metadata i database
+  // Lagre metadata i database (inkludert filePath for sletting)
   const photo = await createPhoto(
     session.user.id,
     publicUrl,
     validated.year,
     validated.title,
-    validated.description
+    validated.description,
+    filePath
   );
 
   // Invalider cache for galleri-siden slik at nye bilder vises
