@@ -1,8 +1,8 @@
-import { UserApprovalList } from "@/app/components/UserApprovalList";
+import { UserApprovalList } from "@/components/UserApprovalList";
 import { getPendingUsers } from "@/lib/db/users";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { Navigation } from "@/app/components/Navigation";
+import { Navigation } from "@/components/Navigation";
 
 export default async function AdminPage() {
   const session = await auth();

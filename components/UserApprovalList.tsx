@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { approveUser } from "@/app/actions/admin";
+import { approveUser } from "@/actions/admin";
 import Image from "next/image";
 import type { User } from "@/lib/db/users";
-import { Button } from "@/app/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 interface UserApprovalListProps {
-  initialUsers: User[];
+  readonly initialUsers: User[];
 }
 
 export function UserApprovalList({ initialUsers }: UserApprovalListProps) {

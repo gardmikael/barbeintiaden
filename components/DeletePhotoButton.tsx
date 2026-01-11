@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { deletePhotoAction } from "@/app/actions/photos-delete";
-import { Button } from "@/app/components/ui/Button";
+import { deletePhotoAction } from "@/actions/photos-delete";
+import { Button } from "@/components/ui/Button";
 
 interface DeletePhotoButtonProps {
   readonly photoId: string;

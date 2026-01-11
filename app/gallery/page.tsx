@@ -1,6 +1,6 @@
-import { PhotoGalleryServer } from "@/app/components/PhotoGalleryServer";
+import { PhotoGalleryServer } from "@/components/PhotoGalleryServer";
 import { auth } from "@/lib/auth";
-import { Navigation } from "@/app/components/Navigation";
+import { Navigation } from "@/components/Navigation";
 
 export default async function GalleryPage() {
   const session = await auth();

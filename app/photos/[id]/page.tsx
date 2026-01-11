@@ -1,9 +1,9 @@
-import { PhotoCard } from "@/app/components/PhotoCard";
-import { CommentSection } from "@/app/components/CommentSection";
-import { DeletePhotoButton } from "@/app/components/DeletePhotoButton";
+import { PhotoCard } from "@/components/PhotoCard";
+import { CommentSection } from "@/components/CommentSection";
+import { DeletePhotoButton } from "@/components/DeletePhotoButton";
 import { getCommentsByPhotoId } from "@/lib/db/comments";
 import { auth } from "@/lib/auth";
-import { Navigation } from "@/app/components/Navigation";
+import { Navigation } from "@/components/Navigation";
 import Link from "next/link";
 
 interface PhotoPageProps {

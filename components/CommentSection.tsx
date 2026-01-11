@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { createComment } from "@/app/actions/comments";
+import { createComment } from "@/actions/comments";
 import { commentSchema } from "@/lib/validation/schemas";
 import Image from "next/image";
 import type { Comment } from "@/lib/db/comments";
-import { Button } from "@/app/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 interface CommentSectionProps {
   photoId: string;

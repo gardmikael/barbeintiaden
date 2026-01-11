@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { auth } from "@/lib/auth";
-import { Navigation } from "@/app/components/Navigation";
-import { ButtonLink } from "@/app/components/ui/ButtonLink";
+import { Navigation } from "@/components/Navigation";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 
 export default async function Home() {
   const session = await auth();

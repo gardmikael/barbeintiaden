@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 interface PhotoCardProps {
-  photoId: string;
+  readonly photoId: string;
 }
 
 export async function PhotoCard({ photoId }: PhotoCardProps) {

@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { uploadPhoto } from "@/app/actions/photos";
+import { uploadPhoto } from "@/actions/photos";
 import { photoUploadSchema } from "@/lib/validation/schemas";
 import { compressImage } from "@/lib/image/compress";
-import { ButtonLink } from "@/app/components/ui/ButtonLink";
-import { Button } from "@/app/components/ui/Button";
+import { ButtonLink } from "@/components/ui/ButtonLink";
+import { Button } from "@/components/ui/Button";
 
 export function UploadForm() {
   const { data: session } = useSession();
@@ -300,7 +300,7 @@ export function UploadForm() {
             return `Laster opp ${previews.length} bilde(r)...`;
           }
           const count = previews.length;
-          const plural = count !== 1 ? "r" : "";
+          const plural = count === 1 ? "" : "r";
           return `Last opp ${count} bilde${plural}`;
         })()}
       </Button>

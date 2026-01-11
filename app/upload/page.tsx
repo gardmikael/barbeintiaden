@@ -1,7 +1,7 @@
-import { UploadForm } from "@/app/components/UploadForm";
+import { UploadForm } from "@/components/UploadForm";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { Navigation } from "@/app/components/Navigation";
+import { Navigation } from "@/components/Navigation";
 
 export default async function UploadPage() {
   const session = await auth();
